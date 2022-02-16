@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/common/product';
+import { CartItem } from 'src/app/common/cart-item';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -20,7 +23,7 @@ export class ProductListComponent implements OnInit {
   theTotalElements: number = 0;
 
   constructor(private productService: ProductService,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute, private cartService: CartService) { 
               
               }
 
@@ -126,5 +129,14 @@ updatePageSize(pageSize: number) {
   this.thePageSize = pageSize;
   this.thePageNumber = 1;
   this.listProducts();
-};
+}
+
+addToCart(theProduct: Product) {
+    
+  console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+  const theCartItem = new CartItem(theProduct);
+
+  this.cartService.addToCart(theCartItem);
+}
 }

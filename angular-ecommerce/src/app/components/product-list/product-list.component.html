@@ -1,4 +1,4 @@
-a<div class="main-content">
+<div class="main-content">
     <div class="section-content section-content-p30">
         <div class="container-fluid">
             <div class="row">
@@ -17,7 +17,7 @@ a<div class="main-content">
                         </a>
                         
                         <div class="price">{{ tempProduct.unitPrice | currency:'USD' }}</div>
-                        <a href="#" class="primary-btn">Add to cart</a>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
                     </div>
 
                 </div>
@@ -41,6 +41,8 @@ a<div class="main-content">
                                 <ngb-pagination [(page)]="thePageNumber"
                                                 [pageSize]="thePageSize"
                                                 [collectionSize]="theTotalElements"
+                                                [maxSize]="5"
+                                                [boundaryLinks]="true"
                                                 (pageChange)="listProducts()">
 
                                 </ngb-pagination>
@@ -51,6 +53,7 @@ a<div class="main-content">
                                 <span class="mr-2">Page Size</span>
 
                                 <select (change)="updatePageSize($event.target.value)">
+                                    <option>2</option>
                                     <option selected="true">5</option>
                                     <option>10</option>
                                     <option>20</option>
